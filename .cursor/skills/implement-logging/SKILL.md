@@ -21,11 +21,11 @@ disable-model-invocation: true
 
 - 日志目录：`src/logs/`（与现有 `log.txt` 同层）；大文件或频繁写入时用 `RotatingFileHandler` 或按运行子目录 `src/logs/runs/<timestamp>/`.
 - 模块内：`logger = logging.getLogger(__name__)`，在训练循环、数据加载、保存 checkpoint 等处打 `logger.info`。
-- 与 `patchtst_impute/train.py` 一致：用 `Path(__file__).resolve().parents[...]` 定位仓库根，再拼 `src/logs/...`，路径字符串在代码里用**正斜杠**或 `Path` 拼接。
+- 与 `impute/train.py` 一致：用 `Path(__file__).resolve().parents[...]` 定位仓库根，再拼 `src/logs/...`，路径字符串在代码里用**正斜杠**或 `Path` 拼接。
 
 ## 最小实现步骤
 
-1. **新增** `patchtst_impute/logging_utils.py`（或等价小模块）：`setup_logging(log_dir: Path, level: str, log_name: str) -> None`，完成：
+1. **新增** `impute/logging_utils.py`（或等价小模块）：`setup_logging(log_dir: Path, level: str, log_name: str) -> None`，完成：
    - `logging.Formatter`：`%(asctime)s %(levelname)s [%(name)s] %(message)s`，`datefmt` 含秒。
    - `StreamHandler(sys.stdout)` → 终端。
    - `logging.handlers.RotatingFileHandler`（或 `FileHandler`）→ `log_dir / log_name`，`encoding="utf-8"`。

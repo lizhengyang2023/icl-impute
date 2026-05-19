@@ -52,29 +52,29 @@ pip install -r requirements.txt
 在仓库根目录激活上述任一环境后：
 
 ```bash
-python src/patchtst_impute/train.py --data_path 你的数据.csv
+python src/impute/train.py --data_path 你的数据.csv
 ```
 
-或使用模块方式（需保证能解析包 `patchtst_impute`，例如已将 `src` 加入 `PYTHONPATH`）：
+或使用模块方式（需保证能解析包 `impute`，例如已将 `src` 加入 `PYTHONPATH`）：
 
 **PowerShell**
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m patchtst_impute.train --data_path 你的数据.csv
+python -m impute.train --data_path 你的数据.csv
 ```
 
 **bash**
 
 ```bash
 export PYTHONPATH=src
-python -m patchtst_impute.train --data_path 你的数据.csv
+python -m impute.train --data_path 你的数据.csv
 ```
 
 常用参数（默认值见 `--help`）：`--seq_len`、`--epochs`、`--batch_size`、`--device`（`cuda` / `cpu`）、`--data_path`。查看全部选项：
 
 ```bash
-python src/patchtst_impute/train.py --help
+python src/impute/train.py --help
 ```
 
 日志默认写入 `src/logs/train.log`（可用 `--log_dir`、`--log_file` 修改）。
@@ -82,7 +82,7 @@ python src/patchtst_impute/train.py --help
 ## 项目结构
 
 ```bash
-src/patchtst_impute/
+src/impute/
 ├── __init__.py             # 对外聚合导出
 ├── train.py                # 命令行入口CLI：argparse → TrainConfig → run_training
 ├── io/                 # 数据读入
@@ -105,7 +105,7 @@ src/patchtst_impute/
 └── log_utils/          # 日志初始化（控制台 + 追加写文件）
     └── __init__.py         # setup_logging（包名避免与标准库 logging 冲突）
 
-src/patchtst_impute/train.py        # 命令行入口
+src/impute/train.py        # 命令行入口
 requirements.txt、environment.yml   # 依赖声明
 ```
 
